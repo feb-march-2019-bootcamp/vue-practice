@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        .completed-todo {
+            color: green;
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="t in todos">
+                <span v-if="t.completed" class="completed-todo">
+                    {{ t.text }}
+                    <button>X</button>
+                </span>
+                <span v-else v-text="t.text"></span>
+
+                <button v-if="!t.completed"
+                    @click="t.completed=true">Complete</button>
+            </li>
+        </ul>
+    </div>
+
+    <script src="./vue-intro.js"></script>
+</body>
+</html>
