@@ -15,16 +15,23 @@
 </head>
 <body>
     <div id="app">
+        Todos
         <ul>
-            <li v-for="t in todos">
-                <span v-if="t.completed" class="completed-todo">
-                    {{ t.text }}
-                    <button>X</button>
-                </span>
-                <span v-else v-text="t.text"></span>
+            <li v-for="t in todos" v-if="!t.completed && !t.deleted">
+                {{ t.text }}
+                <!-- everything inside v-directives is expression, so all JS works there -->
+                <span v-text=" 'abc'.toUpperCase() "></span>
+                <span v-text=" (function(){return 'ABC'}())  "></span>
+                <button @click="t.deleted=true">X</button>
+                <button @click="t.completed=true">Complete</button>
+            </li>
+        </ul>
 
-                <button v-if="!t.completed"
-                    @click="t.completed=true">Complete</button>
+        Completed
+        <ul>
+            <li v-for="t in todos" v-if="t.completed && !t.deleted" class="completed-todo">
+                {{ t.text }}
+                <button @click="t.deleted=true">X</button>
             </li>
         </ul>
     </div>

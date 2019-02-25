@@ -5,8 +5,8 @@ new Vue({
     el: '#app',
     data: {
         todos: [
-            {text: 'First Todo', completed: false},
-            {text: 'Second Todo', completed: false}
+            {text: 'First Todo', completed: false, deleted: false},
+            {text: 'Second Todo', completed: false, deleted: false}
         ]
     }
 })
