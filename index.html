@@ -20,13 +20,25 @@
 <body>
     <div id="app">
         <div>
+            Owner
+            <div>
+                <input type="text" v-model="firstName">
+                <input type="text" v-model="lastName">
+            </div>
+            <div>
+                Full Name <input type="text" v-model="fullName">
+            </div>
+
+            <hr>
+        </div>
+        <div>
             <input type="text" v-model="newTodo">
             <input type="text" v-model="newImage">
             <button @click="addTodo()">Add Todo</button>
         </div>
         Todos
         <ul>
-            <li v-for="t, index in todos" v-if="!t.completed && !t.deleted">
+            <li v-for="t, index in uncompletedTodos">
                 {{ t.text }}
                 <img v-bind:src="t.image" class="small-image">
                 <button @click="t.deleted=true">X</button>
@@ -36,7 +48,7 @@
 
         Completed
         <ul>
-            <li v-for="t in todos" v-if="t.completed && !t.deleted" class="completed-todo">
+            <li v-for="t in completedTodos" class="completed-todo">
                 {{ t.text }}
                 <button @click="t.deleted=true">X</button>
             </li>

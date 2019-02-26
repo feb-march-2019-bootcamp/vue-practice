@@ -4,6 +4,9 @@ import $ from 'jquery';
 new Vue({
     el: '#app',
     data: {
+        firstName: '',
+        lastName: '',
+
         newTodo: '',
         newImage: '',
         todos: [
@@ -11,7 +14,30 @@ new Vue({
             {text: 'Second Todo', completed: false, deleted: false}
         ]
     },
-    methods: {
+    computed: {
+        fullName: {
+            get() {
+                return [
+                    this.firstName,
+                    this.lastName
+                ]
+                .filter(Boolean)
+                .join(' ');
+            },
+            set(value) {
+                [this.firstName = '', this.lastName = ''] = value.split(' ');
+            }
+        },
+        uncompletedTodos() {
+            return this.todos
+                .filter(x => !x.completed);
+        },
+        completedTodos() {
+            return this.todos
+                .filter(x => x.completed);
+        }
+    },
+    methods: { 
         addTodo() {
             if (! this.newTodo) return;
 
@@ -38,3 +64,16 @@ $('#decrement').on('click', () => {
 
     count.html(count.html() - 1)
 })
+
+class A
+{
+    get name() {
+        return 'ABC';
+    }
+
+    set name(value) {
+        console.log(value)
+    }
+}
+
+window.A = A;
