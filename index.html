@@ -11,17 +11,24 @@
             color: green;
             text-decoration: line-through;
         }
+
+        .small-image {
+            max-width: 5rem;
+        }
     </style>
 </head>
 <body>
     <div id="app">
+        <div>
+            <input type="text" v-model="newTodo">
+            <input type="text" v-model="newImage">
+            <button @click="addTodo()">Add Todo</button>
+        </div>
         Todos
         <ul>
-            <li v-for="t in todos" v-if="!t.completed && !t.deleted">
+            <li v-for="t, index in todos" v-if="!t.completed && !t.deleted">
                 {{ t.text }}
-                <!-- everything inside v-directives is expression, so all JS works there -->
-                <span v-text=" 'abc'.toUpperCase() "></span>
-                <span v-text=" (function(){return 'ABC'}())  "></span>
+                <img v-bind:src="t.image" class="small-image">
                 <button @click="t.deleted=true">X</button>
                 <button @click="t.completed=true">Complete</button>
             </li>

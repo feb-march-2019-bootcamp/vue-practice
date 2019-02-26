@@ -4,10 +4,25 @@ import $ from 'jquery';
 new Vue({
     el: '#app',
     data: {
+        newTodo: '',
+        newImage: '',
         todos: [
             {text: 'First Todo', completed: false, deleted: false},
             {text: 'Second Todo', completed: false, deleted: false}
         ]
+    },
+    methods: {
+        addTodo() {
+            if (! this.newTodo) return;
+
+            this.todos.push({
+                text: this.newTodo,
+                image: this.newImage,
+                completed: false,
+            });
+            this.newImage = '';
+            this.newTodo = '';
+        }
     }
 })
 
