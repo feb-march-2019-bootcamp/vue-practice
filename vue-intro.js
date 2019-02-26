@@ -10,8 +10,8 @@ new Vue({
         newTodo: '',
         newImage: '',
         todos: [
-            {text: 'First Todo', completed: false, deleted: false},
-            {text: 'Second Todo', completed: false, deleted: false}
+            {text: 'First Todo', completed: false, important: false},
+            {text: 'Second Todo', completed: false, important: false}
         ]
     },
     computed: {
@@ -38,16 +38,22 @@ new Vue({
         }
     },
     methods: { 
-        addTodo() {
+        addTodo(e) {
             if (! this.newTodo) return;
 
             this.todos.push({
                 text: this.newTodo,
                 image: this.newImage,
-                completed: false,
+                completed: false, 
+                important: false
             });
             this.newImage = '';
             this.newTodo = '';
+        },
+        deleteTodo(todo) {
+            const index = this.todos.indexOf(todo);
+
+            this.todos.splice(index, 1);
         }
     }
 })

@@ -12,6 +12,10 @@
             text-decoration: line-through;
         }
 
+        .important-todo {
+            background: rgba(255, 0, 0, .3); 
+        }
+
         .small-image {
             max-width: 5rem;
         }
@@ -32,8 +36,8 @@
             <hr>
         </div>
         <div>
-            <input type="text" v-model="newTodo">
-            <input type="text" v-model="newImage">
+            <input type="text" @keypress.enter="addTodo()" v-model="newTodo">
+            <input type="text" @keypress.enter="addTodo()" v-model="newImage">
             <button @click="addTodo()">Add Todo</button>
         </div>
         Todos
@@ -41,16 +45,21 @@
             <li v-for="t, index in uncompletedTodos">
                 {{ t.text }}
                 <img v-bind:src="t.image" class="small-image">
-                <button @click="t.deleted=true">X</button>
+                <button @click="deleteTodo(t)">X</button>
                 <button @click="t.completed=true">Complete</button>
             </li>
         </ul>
 
         Completed
         <ul>
-            <li v-for="t in completedTodos" class="completed-todo">
+            <li v-for="t in completedTodos"
+                :class="{'important-todo': t.important}"
+                class="completed-todo">
                 {{ t.text }}
-                <button @click="t.deleted=true">X</button>
+                <button @click="deleteTodo(t)">X</button>
+                <label>
+                    <input type="checkbox" v-model="t.important"> Important
+                </label>
             </li>
         </ul>
     </div>
