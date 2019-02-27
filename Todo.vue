@@ -1,48 +1,52 @@
 <template>
   <div>
-    <div>Owner
-      <div>
-        <input type="text" v-model="firstName">
-        <input type="text" v-model="lastName">
-      </div>
-      <div>Full Name
-        <input type="text" v-model="fullName">
-      </div>
-
-      <hr>
-    </div>
     <div>
-      <input type="text" @keypress.enter="addTodo()" v-model="newTodo">
-      <input type="text" @keypress.enter="addTodo()" v-model="newImage">
-      <button @click="addTodo()">Add Todo</button>
-    </div>Todos
-    <ul>
-      <li v-for="t, index in uncompletedTodos">
-        {{ t.text }}
-        <img v-bind:src="t.image" class="small-image">
-        <button @click="deleteTodo(t)">X</button>
-        <button @click="t.completed=true">Complete</button>
-      </li>
-    </ul>Completed
-    <ul>
-      <li
-        v-for="t in completedTodos"
-        :class="{'important-todo': t.important}"
-        class="completed-todo"
-      >
-        {{ t.text }}
-        <button @click="deleteTodo(t)">X</button>
-        <label>
-          <input type="checkbox" v-model="t.important"> Important
-        </label>
-      </li>
-    </ul>
+      <div>Owner
+        <div>
+          Full Name
+          <span v-text="username"></span>
+        </div>
+
+        <hr>
+      </div>
+      <div>
+        <input type="text" @keypress.enter="addTodo()" v-model="newTodo">
+        <input type="text" @keypress.enter="addTodo()" v-model="newImage">
+        <button @click="addTodo()">Add Todo</button>
+      </div>Todos
+      <ul>
+        <li v-for="(t, index) in uncompletedTodos" :key="t.text">
+          {{ t.text }}
+          <img v-bind:src="t.image" class="small-image">
+          <button @click="deleteTodo(t)">X</button>
+          <button @click="t.completed=true">Complete</button>
+        </li>
+      </ul>Completed
+      <ul>
+        <li
+          v-for="t in completedTodos"
+          :class="{'important-todo': t.important}"
+          class="completed-todo"
+          :key="t.text"
+        >
+          {{ t.text }}
+          <button @click="deleteTodo(t)">X</button>
+          <label>
+            <input type="checkbox" v-model="t.important"> Important
+          </label>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-    data: () => ({
+  props: {
+    username: {type: String, required: true},
+    initialTodos: {type: Array, default: () => []}
+  },
+  data: () => ({
     firstName: "",
     lastName: "",
 
@@ -53,6 +57,9 @@ export default {
       { text: "Second Todo", completed: false, important: false }
     ]
   }),
+  mounted() {
+    this.todos = this.initialTodos.concat();
+  },
   computed: {
     fullName: {
       get() {
@@ -90,8 +97,20 @@ export default {
   }
 };
 </script>
+<style scoped>
+/* Scoped so it will not be overriden by the styles in the html */
 
-<style>
+.completed-todo {
+  color: green;
+  text-decoration: line-through;
+}
 
+.important-todo {
+  background: rgba(255, 0, 0, 0.3);
+}
+
+.small-image {
+  max-width: 5rem;
+}
 </style>
 

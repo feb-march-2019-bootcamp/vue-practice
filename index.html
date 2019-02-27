@@ -1,73 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
-
+  </head>
+  <body>
     <style>
-        .completed-todo {
-            color: green;
-            text-decoration: line-through;
-        }
+      .completed-todo {
+        color: blue;
+        text-decoration: line-through;
+      }
 
-        .important-todo {
-            background: rgba(255, 0, 0, .3); 
-        }
+      .important-todo {
+        background: rgba(255, 0, 0, 0.3);
+      }
 
-        .small-image {
-            max-width: 5rem;
-        }
+      .small-image {
+        max-width: 5rem;
+      }
     </style>
-</head>
-<body>
-    <!-- <div>
-        <div>
-            Owner
-            <div>
-                <input type="text" v-model="firstName">
-                <input type="text" v-model="lastName">
-            </div>
-            <div>
-                Full Name <input type="text" v-model="fullName">
-            </div>
-
-            <hr>
-        </div>
-        <div>
-            <input type="text" @keypress.enter="addTodo()" v-model="newTodo">
-            <input type="text" @keypress.enter="addTodo()" v-model="newImage">
-            <button @click="addTodo()">Add Todo</button>
-        </div>
-        Todos
-        <ul>
-            <li v-for="t, index in uncompletedTodos">
-                {{ t.text }}
-                <img v-bind:src="t.image" class="small-image">
-                <button @click="deleteTodo(t)">X</button>
-                <button @click="t.completed=true">Complete</button>
-            </li>
-        </ul>
-
-        Completed
-        <ul>
-            <li v-for="t in completedTodos"
-                :class="{'important-todo': t.important}"
-                class="completed-todo">
-                {{ t.text }}
-                <button @click="deleteTodo(t)">X</button>
-                <label>
-                    <input type="checkbox" v-model="t.important"> Important
-                </label>
-            </li>
-        </ul>
-    </div> -->
 
     <div id="app">
-        <todo></todo>
+        <div>
+            <input type="text" v-model="newUsername">
+            <button @click="addTodolist">Add TodoList</button>
+        </div>
+        <todo v-for="u in todoListsUsernames" 
+            :initial-todos="[1,2,3]"
+            v-bind:username="u"></todo>
     </div>
 
+    <div id="app2"></div>
+
     <script src="./vue-intro.js"></script>
-</body>
+  </body>
 </html>
