@@ -24,11 +24,19 @@
 
     <div id="app">
         <div>
-            <input type="text" v-model="newUsername">
+            <!-- how v-model works -->
+            <input type="text" v-bind:value="name" v-on:input="name=$event.target.value">
+            {{ name }}
+
+            <hr>
+        </div>
+        <div>
+            <!-- <input type="text" v-model="newUsername"> -->
+            <material-input type="text" placeholder="Username" v-model="newUsername"></material-input>
             <button @click="addTodolist">Add TodoList</button>
         </div>
-        <todo v-for="u in todoListsUsernames" 
-            :initial-todos="[1,2,3]"
+        <todo v-for="u in todoListsUsernames"
+            :key="u"
             v-bind:username="u"></todo>
     </div>
 

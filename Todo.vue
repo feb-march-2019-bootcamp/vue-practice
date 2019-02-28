@@ -14,24 +14,25 @@
         <input type="text" @keypress.enter="addTodo()" v-model="newImage">
         <button @click="addTodo()">Add Todo</button>
       </div>Todos
+      
+      <todo-list
+        @delete-todo="deleteTodo"
+        @complete-todo="$event.completed=true"
+        :todos="uncompletedTodos"
+      ></todo-list>
+      
+      Completed
       <ul>
-        <li v-for="(t, index) in uncompletedTodos" :key="t.text">
+        <li
+          v-for="(t, index) in abc"
+          :key="t.text"
+          :class="{'important-todo': t.important, 'completed-todo': t.completed}"
+        >
           {{ t.text }}
           <img v-bind:src="t.image" class="small-image">
           <button @click="deleteTodo(t)">X</button>
-          <button @click="t.completed=true">Complete</button>
-        </li>
-      </ul>Completed
-      <ul>
-        <li
-          v-for="t in completedTodos"
-          :class="{'important-todo': t.important}"
-          class="completed-todo"
-          :key="t.text"
-        >
-          {{ t.text }}
-          <button @click="deleteTodo(t)">X</button>
-          <label>
+          <button v-if="!t.completed" @click="$emit('complete-todo', t)">Complete</button>
+          <label v-else>
             <input type="checkbox" v-model="t.important"> Important
           </label>
         </li>
@@ -43,8 +44,7 @@
 <script>
 export default {
   props: {
-    username: {type: String, required: true},
-    initialTodos: {type: Array, default: () => []}
+    username: { type: String, required: true }
   },
   data: () => ({
     firstName: "",
@@ -52,14 +52,8 @@ export default {
 
     newTodo: "",
     newImage: "",
-    todos: [
-      { text: "First Todo", completed: false, important: false },
-      { text: "Second Todo", completed: false, important: false }
-    ]
+    todos: []
   }),
-  mounted() {
-    this.todos = this.initialTodos.concat();
-  },
   computed: {
     fullName: {
       get() {
@@ -97,20 +91,7 @@ export default {
   }
 };
 </script>
+
 <style scoped>
-/* Scoped so it will not be overriden by the styles in the html */
-
-.completed-todo {
-  color: green;
-  text-decoration: line-through;
-}
-
-.important-todo {
-  background: rgba(255, 0, 0, 0.3);
-}
-
-.small-image {
-  max-width: 5rem;
-}
 </style>
 
