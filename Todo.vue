@@ -22,21 +22,11 @@
       ></todo-list>
       
       Completed
-      <ul>
-        <li
-          v-for="(t, index) in abc"
-          :key="t.text"
-          :class="{'important-todo': t.important, 'completed-todo': t.completed}"
-        >
-          {{ t.text }}
-          <img v-bind:src="t.image" class="small-image">
-          <button @click="deleteTodo(t)">X</button>
-          <button v-if="!t.completed" @click="$emit('complete-todo', t)">Complete</button>
-          <label v-else>
-            <input type="checkbox" v-model="t.important"> Important
-          </label>
-        </li>
-      </ul>
+      <todo-list
+        @delete-todo="deleteTodo"
+        @complete-todo="$event.completed=true"
+        :todos="completedTodos"
+      ></todo-list>
     </div>
   </div>
 </template>
