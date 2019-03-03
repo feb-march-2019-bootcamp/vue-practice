@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Document</title>
   </head>
   <body>
@@ -37,7 +38,11 @@
         </div>
         <todo v-for="u in todoListsUsernames"
             :key="u"
-            v-bind:username="u"></todo>
+            v-bind:username="u"
+        >
+          <h1>This is header {{ u }}</h1>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor voluptates repellendus soluta accusamus, saepe quasi, dignissimos sit enim ad libero quod temporibus quam. Maxime aliquid obcaecati nobis quia numquam doloremque.</p>
+        </todo>
     </div>
 
     <div id="app2"></div>

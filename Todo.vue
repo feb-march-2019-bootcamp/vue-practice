@@ -10,6 +10,11 @@
         <hr>
       </div>
       <div>
+        <div>
+          <slot>
+            Default slot is empty
+          </slot>
+        </div>
         <input type="text" @keypress.enter="addTodo()" v-model="newTodo">
         <input type="text" @keypress.enter="addTodo()" v-model="newImage">
         <button @click="addTodo()">Add Todo</button>
@@ -19,7 +24,14 @@
         @delete-todo="deleteTodo"
         @complete-todo="$event.completed=true"
         :todos="uncompletedTodos"
-      ></todo-list>
+      >
+      <template v-slot="p">
+        <div>
+          {{ p.todo.text }}
+          <button class="btn btn-danger">Delete</button>
+        </div>
+        </template>
+      </todo-list>
       
       Completed
       <todo-list
@@ -34,7 +46,8 @@
 <script>
 export default {
   props: {
-    username: { type: String, required: true }
+    username: { type: String, required: true },
+    innerText: {type: String}
   },
   data: () => ({
     firstName: "",

@@ -2,13 +2,17 @@
   <ul>
     <li v-for="(t, index) in todos" :key="t.text" 
         :class="{'important-todo': t.important, 'completed-todo': t.completed}">
-      {{ t.text }}
-      <img v-bind:src="t.image" class="small-image">
-      <button @click="deleteTodo(t)">X</button>
-      <button v-if="!t.completed" @click="$emit('complete-todo', t)">Complete</button>
-      <label v-else>
-        <input type="checkbox" v-model="t.important"> Important
-      </label>
+      <slot :todo="t" :index="index"> 
+
+         {{ t.text }}
+        <img v-bind:src="t.image" class="small-image">
+        <button @click="deleteTodo(t)">X</button>
+        <button v-if="!t.completed" @click="$emit('complete-todo', t)">Complete</button>
+        <label v-else>
+          <input type="checkbox" v-model="t.important"> Important
+        </label>
+
+      </slot>
     </li>
   </ul>
 </template>

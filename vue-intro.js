@@ -16,7 +16,7 @@ new Vue({
       name: 'Foo',
       newUsername: '',
       todoListsUsernames: [
-        'A'
+        'Jon Doe'
       ]
   },
   methods: {
