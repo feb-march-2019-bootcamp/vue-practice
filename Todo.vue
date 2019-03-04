@@ -1,5 +1,9 @@
 <template>
   <div>
+    <h1>
+      <slot name="header">
+      </slot>
+    </h1>
     <div>
       <div>Owner
         <div>
