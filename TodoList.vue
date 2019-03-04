@@ -6,8 +6,11 @@
 
          {{ t.text }}
         <img v-bind:src="t.image" class="small-image">
-        <button @click="deleteTodo(t)">X</button>
-        <button v-if="!t.completed" @click="$emit('complete-todo', t)">Complete</button>
+
+        <template v-if="!t.completed">
+          <button @click="deleteTodo(t)">X</button>
+          <button @click="$emit('complete-todo', t)">Complete</button>
+        </template>
         <label v-else>
           <input type="checkbox" v-model="t.important"> Important
         </label>

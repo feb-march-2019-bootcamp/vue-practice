@@ -25,7 +25,7 @@
         @complete-todo="$event.completed=true"
         :todos="uncompletedTodos"
       >
-      <template v-slot="p">
+        <template slot="default" slot-scope="p">
         <div>
           {{ p.todo.text }}
           <button class="btn btn-danger">Delete</button>
@@ -39,6 +39,12 @@
         @complete-todo="$event.completed=true"
         :todos="completedTodos"
       ></todo-list>
+
+      <footer>
+        <slot name="footer">
+          This is a footer
+        </slot>
+      </footer>
     </div>
   </div>
 </template>

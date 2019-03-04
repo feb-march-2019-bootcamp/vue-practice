@@ -39,9 +39,15 @@
         <todo v-for="u in todoListsUsernames"
             :key="u"
             v-bind:username="u"
-        >
-          <h1>This is header {{ u }}</h1>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor voluptates repellendus soluta accusamus, saepe quasi, dignissimos sit enim ad libero quod temporibus quam. Maxime aliquid obcaecati nobis quia numquam doloremque.</p>
+            >
+            <h1>This is header {{ u }}</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor voluptates repellendus soluta accusamus, saepe quasi, dignissimos sit enim ad libero quod temporibus quam. Maxime aliquid obcaecati nobis quia numquam doloremque.</p>
+
+            <template slot="footer">
+              <div class="text-center">
+                This is the new footer
+              </div>
+            </template>
         </todo>
     </div>
 
