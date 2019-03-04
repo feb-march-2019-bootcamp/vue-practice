@@ -21,7 +21,7 @@
         </div>
         <input type="text" @keypress.enter="addTodo()" v-model="newTodo">
         <input type="text" @keypress.enter="addTodo()" v-model="newImage">
-        <button @click="addTodo()">Add Todo</button>
+        <button @click="addTodo()" class="btn btn-primary btn-sm btn-block">Add Todo</button>
       </div>Todos
       
       <todo-list
@@ -32,7 +32,17 @@
         <template slot="default" slot-scope="p">
         <div>
           {{ p.todo.text }}
-          <button class="btn btn-danger">Delete</button>
+
+          <div class="btn-group">
+            <button class="btn btn-success btn-sm" 
+            @click="p.todo.completed = true">
+              Complete
+            </button>
+            <button class="btn btn-danger btn-sm" 
+            @click="deleteTodo(p.todo)">
+              Delete
+            </button>
+          </div>  
         </div>
         </template>
       </todo-list>
